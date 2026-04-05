@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Source Viewer</title>
+<style>
+body{background:#111;color:#eee;font-family:monospace;padding:20px}
+pre{white-space:pre-wrap}
+</style>
+</head>
+<body>
+
+<h2 id="filename"></h2>
+<pre id="code">Loading...</pre>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const file = params.get("file");
+
+document.getElementById("filename").innerText = file;
+
+fetch(file)
+  .then(res => res.text())
+  .then(text => {
+    document.getElementById("code").textContent = text;
+  })
+  .catch(() => {
+    document.getElementById("code").textContent = "โหลดไฟล์ไม่ได้";
+  });
+</script>
+
+</body>
+</html>
